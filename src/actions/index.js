@@ -10,3 +10,12 @@ export function fetchQuiz(quizId){
     payload: request
   }
 }
+
+export function postQuiz(quizForm){
+  const response = axios.post(url + `quizzes`, quizForm)
+
+  return{
+    type: 'POST_QUIZ',
+    payload: response
+  }
+}
