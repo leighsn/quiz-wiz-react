@@ -9,10 +9,10 @@ export default (
   <Route path="/" component={App}>
     <Route path="quizzes">
       <IndexRoute component={QuizIndex} />
-      <Route path=":id" component={QuizShow} />
       <Route path="new">
         <IndexRoute component={NewQuizForm} />
       </Route>
+      <Route path=":id" component={QuizShow} />
     </Route>
   </Route>
 
