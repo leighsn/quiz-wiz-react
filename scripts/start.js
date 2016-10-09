@@ -14,7 +14,7 @@ var config = require('../config/webpack.config.dev');
 var paths = require('../config/paths');
 
 // Tools like Cloud9 rely on this.
-var DEFAULT_PORT = process.env.PORT || 3000;
+var DEFAULT_PORT = process.env.PORT || 8080;
 var compiler;
 var handleCompile;
 
@@ -169,7 +169,7 @@ function onProxyError(proxy) {
       ' from ' + chalk.cyan(host) + ' to ' + chalk.cyan(proxy) + '.'
     );
     console.log(
-      'See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (' + 
+      'See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (' +
       chalk.cyan(err.code) + ').'
     );
     console.log();

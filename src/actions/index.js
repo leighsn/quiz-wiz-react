@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:8000/';
+const url = 'http://localhost:3000/';
 
 export function fetchQuiz(quizId){
   const request = axios.get(url + `quizzes/${quizId}`)
@@ -17,5 +17,20 @@ export function postQuiz(quizForm){
   return{
     type: 'POST_QUIZ',
     payload: response
+  }
+}
+
+export function setQuiz(quizForm){
+  return {
+    type: 'SET_QUIZ',
+    payload: quizForm
+  }
+}
+
+export function addQuestionToQuiz(question){
+  question = question.target
+  return {
+    type: 'ADD_QUESTION',
+    payload: question
   }
 }
