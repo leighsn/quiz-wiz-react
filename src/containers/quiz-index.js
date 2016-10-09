@@ -5,18 +5,27 @@ import { Link } from 'react-router';
 class QuizIndex extends Component  {
   render(){
     return (
-      <ol>
-      {this.props.quizzes.map(function(quiz){
-        return <li> <Link to={`/quizzes/${quiz.id}`}>{quiz.title}</Link></li>})}
-      </ol>
+      <div>
+        <h1>Quizzes</h1>
+        <ol>
+          {this.props.quizzes.map(function(quiz){
+            return <li> <Link to={`/quizzes/${quiz.id}`}>{quiz.title}</Link></li>})}
+        </ol>
+      </div>
     )
   }
 
 }
 
 function mapStateToProps(state){
-  return {
-    quizzes: state.quizzes
+  if (!!state.quizzes) {
+    return {
+      quizzes: state.quizzes
+    }
+  } else {
+    return {
+      quizzes: []
+    }
   }
 }
 

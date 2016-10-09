@@ -11,6 +11,15 @@ export function fetchQuiz(quizId){
   }
 }
 
+export function fetchQuizzes(){
+  const request = axios.get(url + `quizzes`)
+
+  return {
+    type: 'FETCH_QUIZZES',
+    payload: request
+  }
+}
+
 export function postQuiz(quizForm){
   const response = axios.post(url + `quizzes`, quizForm)
 
