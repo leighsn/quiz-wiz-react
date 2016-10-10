@@ -1,20 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { postQuiz } from '../actions/index';
+import * as quizFormActions from '../actions/index';
 import { bindActionCreators } from 'redux';
+import QuestionInput from './question-input-form';
 
 class NewQuizForm extends Component  {
   constructor(){
     super()
-    this.state = {
-      quizForm: {title: '', description: '', questions: []}
-    };
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
   }
 
   handleFormSubmit(){
-    this.setState({quizForm: {title: this.refs.titleInputField.value}}, ()=>{this.props.postQuiz(this.state.quizForm)})
+    console.log("quizForm", this.props.quizForm);
+    const quizForm = {quiz:{title: this.refs.titleInputField.value, description: this.refs.descriptionInputField.value, questions: this.props.quizForm.questions}}
+    this.props.actions.postQuiz(quizForm)
   }
+
+  appendQuestionInput(e) {
+    e.preventDefault();
+    const newQuestionInput = {inputValue: `input-${this.props.quizForm.questions.length}`};
+    this.props.actions.setQuiz({ title: this.refs.titleInputField.value, description: this.refs.descriptionInputField.value, questions: this.props.quizForm.questions.concat([newQuestionInput])});
+  }
+
   render(){
     return (
       <div>
@@ -23,9 +30,18 @@ class NewQuizForm extends Component  {
           this.handleFormSubmit()
         }}>
           <h2>
-            {this.state.quizForm.title}
+            {this.props.quizForm.title}
           </h2>
           <input ref="titleInputField" placeholder="Enter a new Quiz Title" />
+          <input ref="descriptionInputField" placeholder="Enter the Quiz Description" />
+
+          <div id="dynamicInput">
+            {this.props.quizForm.questions.map((question, index) => <QuestionInput key={index} inputValue={question.inputValue} id={index} ref="questions" />)}
+          </div>
+
+          <button onClick={ (e) => this.appendQuestionInput(e) }>
+            CLICK ME TO ADD AN INPUT
+          </button>
 
           <input type="submit" value="Submit" />
         </form>
@@ -34,14 +50,22 @@ class NewQuizForm extends Component  {
   }
 }
 
-function mapStateToProps(state){
-  return{
-    quizForm: state.quizForm
+function mapStateToProps(state) {
+  if (!state.quizForm) {
+    return {
+      quizForm: {title: '', description: '', questions: []}
+    }
+  } else {
+    return {
+      quizForm: state.quizForm
+    }
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({ postQuiz }, dispatch)
+  return {
+    actions: bindActionCreators(quizFormActions, dispatch)
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewQuizForm);

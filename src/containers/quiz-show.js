@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchQuiz } from '../actions/index';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
 
 class QuizShow extends Component {
   componentWillMount(){
@@ -13,6 +14,10 @@ class QuizShow extends Component {
     }
     return(
       <div>
+        <p>
+          <Link to={`/quizzes`} className="pull-left"> {"<-- Back"}</Link>
+        </p>
+        <br />
         <div>{this.props.quizShow.title}</div>
         <div>{this.props.quizShow.description}</div>
         <ol>{this.props.quizShow.questions.map(function(question){
