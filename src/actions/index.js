@@ -43,3 +43,11 @@ export function addQuestionToQuiz(question){
     payload: question
   }
 }
+
+export function fetchCohorts(){
+  const response = axios.get(url + '/cohorts')
+  return {
+    type: 'FETCH_COHORTS',
+    payload: response
+  }
+}

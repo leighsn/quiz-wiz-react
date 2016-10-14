@@ -4,7 +4,6 @@ import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
-import './index.css';
 import routes from './routes';
 import rootReducer from './reducers/root-reducer';
 import { fetchQuizzes } from './actions/index'
