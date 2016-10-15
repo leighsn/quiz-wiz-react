@@ -51,3 +51,16 @@ export function fetchCohorts(){
     payload: response
   }
 }
+
+export function filterCohorts(column, flag){
+  return {
+    type: 'FILTER_COHORTS',
+    payload: column,
+    filterFlag: flag
+  }
+}
+
+//when user clicks checkbox, we want props to be updated with only the cohorts belonging
+//to that user. But we don't want to lose other cohorts - want them stored on cohorts state
+//user cohorts
+//if this checkbox is checked, render all

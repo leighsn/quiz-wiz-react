@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { fetchCohorts } from '../actions/index';
+import { filterCohorts } from '../actions/index';
 import { formatDate } from '../utils/utils'
 import  { browserHistory } from 'react-router'
 
@@ -11,14 +12,18 @@ class CohortIndex extends Component {
   constructor(props){
     super(props)
     this.renderCohorts = this.renderCohorts.bind(this)
+    this.handleTableClick = this.handleTableClick.bind(this)
+    this.state = {filterFlag: false}
+
   }
 
   componentWillMount(){
     this.props.fetchCohorts()
   }
 
-  componentDidReceiveProps(){
-    this.setState()
+  handleTableClick(e){
+    this.setState({filterFlag: !this.state.filterFlag})
+    this.props.filterCohorts(e.target.id, this.state.filterFlag)
   }
 
   renderCohorts(){
@@ -44,9 +49,9 @@ class CohortIndex extends Component {
         <table className="table table-striped table-hover">
           <thead className="thead default">
             <tr>
-              <th>Name</th>
-              <th>Class Name</th>
-              <th>Start Date</th>
+              <th onClick={this.handleTableClick} id="flatiron_named">Flatiron Name</th>
+              <th onClick={this.handleTableClick} id="student_named">Student Name</th>
+              <th onClick={this.handleTableClick} id="start_date">Start Date</th>
             </tr>
           </thead>
           <tbody>
@@ -62,12 +67,13 @@ class CohortIndex extends Component {
 
 function mapStateToProps(state){
   return {
-    cohorts: state.cohorts
+    cohorts: state.cohorts,
+    userCohorts: state.userCohorts
   }
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchCohorts}, dispatch)
+  return bindActionCreators({fetchCohorts, filterCohorts}, dispatch)
 }
 
 
