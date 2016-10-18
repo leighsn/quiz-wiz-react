@@ -6,6 +6,7 @@ import { fetchCohorts } from '../actions/index';
 import { filterCohorts } from '../actions/index';
 import { formatDate } from '../utils/utils'
 import  { browserHistory } from 'react-router'
+import TableRow from './../components/table-row'
 
 class CohortIndex extends Component {
 
@@ -30,15 +31,17 @@ class CohortIndex extends Component {
     if (!!this.props.cohorts){
       return this.props.cohorts.map( cohort => {
         return (
-          <tr key={cohort.id} onClick={()=>{browserHistory.push(`/cohorts/${cohort.id}`)}}>
-            <td className="col-xs-4">{cohort.flatiron_named}</td>
-            <td className="col-xs-4">{cohort.student_named}</td>
-            <td className="col-xs-4">{formatDate(new Date(cohort.start_date))}</td>
-          </tr>
+          <TableRow key={cohort.id} model={cohort} modelName="cohort"
+            columns={{column_one: cohort.flatiron_named,
+                      column_two: cohort.student_named,
+                      column_three: formatDate(new Date(cohort.start_date))
+                    }} />
         )
       })
     } else {
-      return <div>Loading</div>
+      return <tr>
+              <td>Loading</td>
+            </tr>
     }
   }
 
@@ -46,12 +49,12 @@ class CohortIndex extends Component {
     return (
       <div>
         <h1>Cohorts </h1>
-        <table className="table table-striped table-hover">
-          <thead className="thead default">
+        <table className="table table-striped table-hover table-bordered">
+          <thead className="thead inverse">
             <tr>
-              <th onClick={this.handleTableClick} id="flatiron_named">Flatiron Name</th>
-              <th onClick={this.handleTableClick} id="student_named">Student Name</th>
-              <th onClick={this.handleTableClick} id="start_date">Start Date</th>
+              <th><span onClick={this.handleTableClick}  id="flatiron_named" className="glyphicon glyphicon-sort" aria-hidden="true"></span> Flatiron Named </th>
+              <th><span onClick={this.handleTableClick} id="student_named" className="glyphicon glyphicon-sort" aria-hidden="true"></span> Student Name </th>
+              <th><span onClick={this.handleTableClick} id="start_date" className="glyphicon glyphicon-sort" aria-hidden="true"></span> Start Date</th>
             </tr>
           </thead>
           <tbody>
