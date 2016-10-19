@@ -1,3 +1,6 @@
+import { sortCohorts } from '../utils/utils';
+import { formatCohortDates } from '../utils/utils';
+
 export default function (state = null, action){
   switch (action.type) {
     case 'FETCH_COHORTS':
@@ -7,20 +10,4 @@ export default function (state = null, action){
     default:
       return state
   }
-}
-
-function direction (bool){
-  return bool ? 1 : -1;
-}
-
-function sortCohorts(state, column, ascending){
-  return Object.assign([], state.slice().sort((a, b)=>{
-    if (a[column] < b[column]){
-      return direction(ascending)
-    } else if (a[column] > b[column]){
-      return direction(!ascending)
-    } else {
-      return 0;
-    }
-  }))
 }
