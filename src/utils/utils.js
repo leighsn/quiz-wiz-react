@@ -17,3 +17,11 @@ var months = {
   10: "November",
   11: "December"
 }
+
+
+export function formatText(text){
+  let str = text.split("_").map((word)=>{
+    return word[0].toUpperCase().concat(word.slice(1, word.length))
+  })
+  return str.join(" ")
+}

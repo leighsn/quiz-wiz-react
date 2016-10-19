@@ -20,10 +20,10 @@ class TableRow extends Component {
 
   render(){
     return (
-      <tr key={this.props.model.id} onClick={()=>{browserHistory.push(`/${this.props.modelName}s/${this.props.model.id}`)}} onMouseEnter={()=>{this.handleHover()}} onMouseOut={this.handleMouseOut}>
-        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.columns.column_one}</td>
-        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.columns.column_two}</td>
-        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.columns.column_three}</td>
+      <tr key={this.props.key} onClick={()=>{browserHistory.push(`/${this.props.modelName}s/${this.props.model.id}`)}} onMouseEnter={()=>{this.handleHover()}} onMouseOut={this.handleMouseOut}>
+        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.row[this.props.column_one]}</td>
+        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.row[this.props.column_two]}</td>
+        <td className="col-xs-4" style={{textDecoration: this.state.textDecoration}}>{this.props.row[this.props.column_three]}</td>
       </tr>
     )
   }

@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchCohort } from '../actions/index'
+import { fetchCohort } from '../actions/index';
+import TableRow from '../components/table-row';
 
 
 class CohortShow extends Component {
+  constructor(props){
+    super(props)
+  }
 
   componentWillMount(){
     this.props.fetchCohort(this.props.params.id)
   }
 
+  renderCohortStudents(){
+    return this.props.cohortShow.students.map((student)=>{
+
+    })
+  }
+
   render(){
     return (
-      <div>hi</div>
+      <div>hi
+      
+      </div>
     )
   }
 }
