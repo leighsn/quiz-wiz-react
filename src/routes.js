@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './components/App'
-import QuizIndex from './containers/quiz-index'
-import NewQuizForm from './components/new-quiz-form'
-import QuizShow from './containers/quiz-show'
+import App from './components/App';
+import QuizIndex from './containers/quiz-index';
+import NewQuizForm from './components/new-quiz-form';
+import QuizShow from './containers/quiz-show';
 import CohortIndex from './containers/cohort-index';
+import CohortShow from './containers/cohort-show';
 
 export default (
   <Route path="/" component={App}>
@@ -17,7 +18,7 @@ export default (
     </Route>
     <Route path="/cohorts">
       <IndexRoute component={CohortIndex} />
+      <Route path=":id" component={CohortShow} />
     </Route>
   </Route>
-
 )

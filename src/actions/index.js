@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/';
+export const url = 'http://localhost:3000/';
 
 export function fetchQuiz(quizId){
   const request = axios.get(url + `quizzes/${quizId}`)
@@ -45,9 +45,25 @@ export function addQuestionToQuiz(question){
 }
 
 export function fetchCohorts(){
-  const response = axios.get(url + '/cohorts')
+  const response = axios.get(url + 'cohorts')
   return {
     type: 'FETCH_COHORTS',
     payload: response
+  }
+}
+
+export function filterCohorts(column, flag){
+  return {
+    type: 'FILTER_COHORTS',
+    payload: column,
+    filterFlag: flag
+  }
+}
+
+export function fetchCohort(id){
+  const req = axios.get(url + `cohorts/${id}`)
+  return {
+    type: 'FETCH_COHORT',
+    payload: req
   }
 }
