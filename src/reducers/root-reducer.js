@@ -5,6 +5,7 @@ import quizShowReducer from './quiz-show-reducer';
 import quizzesForm from './quiz-form-reducer';
 import cohortsReducer from './cohorts-reducer';
 import cohortShowReducer from './cohort-show-reducer'
+import { reducer as formReducer } from 'redux-form'
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   quizForm: quizzesForm,
   quizShow: quizShowReducer,
   cohorts: cohortsReducer,
-  cohortShow: cohortShowReducer
+  cohortShow: cohortShowReducer,
+  form: formReducer
 })
 
 export default rootReducer;
